@@ -1,0 +1,10 @@
+pillow
+streamlit
+pandas
+numpy
+seaborn
+matplotlib
+numerize
+plotly
+plotly
+os
