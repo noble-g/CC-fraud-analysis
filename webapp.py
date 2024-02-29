@@ -1,5 +1,3 @@
-
-
 from PIL import Image
 import streamlit as st
 import pandas as pd
@@ -9,10 +7,16 @@ import matplotlib.pyplot as plt
 from numerize.numerize import numerize
 import plotly.express as px
 import plotly.figure_factory as ff
+import os
 
 ## import Data
-#df = pd.read_csv("C:/Users/USER/Desktop/Credit card fraud detection/creditcard.csv")
-df = pd.read_csv("https://drive.google.com/file/d/1m9a1J2DcUQh_TavR16fJoWdxT33ZA_J1/view?usp=sharing")
+current_dir = os.path.dirname(__file__)
+relative_path = os.path.join(current_dir, "materials", "creditcard.csv")
+# Load the CSV file using the relative path
+df = pd.read_csv(relative_path)
+
+#file = "materials/creditcard.csv"
+#df = pd.read_csv(file)
 # Configure streamlit page
 st.set_page_config(page_title = "CC Fraud", page_icon = "🚩",layout="wide")
 
@@ -35,8 +39,8 @@ col4.metric("Number of Normal Transactions", df.shape[0] - df['Class'].sum())
 st.subheader('Dataset')
 st.write(df)
 
-corr = Image.open("C:/Users/USER/Desktop/Credit card fraud detection/materials/correlation_matrix.png")
-scat_mat = Image.open("C:/Users/USER/Desktop/Credit card fraud detection/materials/scatterplot_matrix.png")
+corr = Image.open(os.path.join(current_dir, "materials", "correlation_matrix.png"))
+scat_mat = Image.open(os.path.join(current_dir, "materials", "scatterplot_matrix.png"))
 
 chart1, chart2 = st.columns(2)
 # Correlation Matrix
@@ -51,8 +55,8 @@ with chart2:
 st.subheader('SMOTE - Synthetic Minority Oversampling Technique')
 st.write("Synthetic Minority Over-sampling Technique (SMOTE), is a method designed to address the issue of class imbalance in machine learning datasets. In many real-world classification problems, the number of examples belonging to one class significantly outweighs the number of examples in another class. This imbalance can lead to biased models that favor the majority class and perform poorly on minority class predictions. SMOTE tackles this problem by generating synthetic examples for the minority class. It does so by identifying minority class instances and creating new synthetic instances along the line segments joining them. By strategically synthesizing new data points, SMOTE effectively rebalances the class distribution, providing more robust training data for machine learning models. This technique helps to alleviate the bias towards the majority class and improves the model's ability to accurately classify instances from the minority class. However, it's essential to use SMOTE judiciously and consider potential drawbacks, such as the introduction of synthetic noise or overfitting, in order to achieve optimal results.")
 # Before and after SMOTE
-b4 = Image.open("C:/Users/USER/Desktop/Credit card fraud detection/materials/b4_SMOTE_pie_plot.png")
-afta = Image.open("C:/Users/USER/Desktop/Credit card fraud detection/materials/afta_SMOTE_pie_plot.png")
+b4 = Image.open(os.path.join(current_dir, "materials", "b4_SMOTE_pie_plot.png"))
+afta = Image.open(os.path.join(current_dir, "materials", "afta_SMOTE_pie_plot.png"))
 
 before, after = st.columns(2)
 with before:
